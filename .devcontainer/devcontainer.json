@@ -12,6 +12,15 @@
 	"postCreateCommand": "npm install",
 	// Configure tool-specific properties.
 	// "customizations": {},
+	"forwardPorts": [
+		3000
+	],
+	"portsAttributes": {
+		"3000": {
+			"label": "React App",
+			"onAutoForward": "openPreview"
+		}
+	},
 	"settings": {
 		"workbench.colorTheme": "Night Owl",
 		"terminal.integrated.shell.linux": "/bin/bash",
