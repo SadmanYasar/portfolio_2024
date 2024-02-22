@@ -3,7 +3,7 @@ import { Physics } from '@react-three/rapier'
 import { Environment, KeyboardControls } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Suspense, useEffect, useState } from 'react'
-import Ecctrl, { EcctrlJoystick } from 'ecctrl'
+import Ecctrl, { EcctrlAnimation, EcctrlJoystick } from 'ecctrl'
 
 import Lights from './Lights'
 // import Map from './Map'
@@ -39,6 +39,8 @@ const EcctrlJoystickControls = () => {
 }
 
 export default function App() {
+  const characterURL = "./sayem-animated.glb"
+
   const keyboardMap = [
     { name: "forward", keys: ["ArrowUp", "KeyW"] },
     { name: "backward", keys: ["ArrowDown", "KeyS"] },
@@ -49,19 +51,15 @@ export default function App() {
   ];
 
   const animationSet = {
-    idle: "Idle",
-    walk: "Walk",
-    run: "Run",
-    jump: "Jump_Start",
-    jumpIdle: "Jump_Idle",
-    jumpLand: "Jump_Land",
-    fall: "Climbing", // This is for falling from high sky
-    // Currently support four additional animations
-    action1: "Wave",
-    action2: "Dance",
-    action3: "Cheer",
-    action4: "Attack(1h)", // This is special action which can be trigger while walking or running
-  };
+    idle: 'Idle',
+    walk: 'Walk',
+    run: 'Running',
+    jump: 'Jump_Start',
+    jumpIdle: 'Falling_Idle',
+    jumpLand: 'Jump_Land',
+    fall: 'Falling_Idle'
+  }
+
   return (
     <>
       <EcctrlJoystickControls />
@@ -81,21 +79,24 @@ export default function App() {
         <axesHelper args={[5]} />
         <Environment background files="/night.hdr" />
         <Lights />
-        <Physics>
+        <Physics timeStep={"vary"}>
           <KeyboardControls map={keyboardMap}>
-            <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}>
-              <Ecctrl
-                debug
-                followLight
-                characterURL={"/player.glb"}
-                animationSet={animationSet}
+            {/* <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}> */}
+            <Ecctrl
+              debug
+              animated
+            >
+              <EcctrlAnimation
+                characterURL={characterURL} // Must have property
+                animationSet={animationSet} // Must have property
               >
                 <CharacterModel />
-              </Ecctrl>
-              {/* <Map /> */}
-              <Ground />
-            </Suspense>
+              </EcctrlAnimation>
+            </Ecctrl>
+            {/* <Map /> */}
+            {/* </Suspense> */}
           </KeyboardControls>
+          <Ground />
         </Physics>
       </Canvas>
     </>
