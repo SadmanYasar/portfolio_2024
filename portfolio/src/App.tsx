@@ -47,6 +47,21 @@ export default function App() {
     { name: "jump", keys: ["Space"] },
     { name: "run", keys: ["Shift"] },
   ];
+
+  const animationSet = {
+    idle: "Idle",
+    walk: "Walk",
+    run: "Run",
+    jump: "Jump_Start",
+    jumpIdle: "Jump_Idle",
+    jumpLand: "Jump_Land",
+    fall: "Climbing", // This is for falling from high sky
+    // Currently support four additional animations
+    action1: "Wave",
+    action2: "Dance",
+    action3: "Cheer",
+    action4: "Attack(1h)", // This is special action which can be trigger while walking or running
+  };
   return (
     <>
       <EcctrlJoystickControls />
@@ -63,20 +78,24 @@ export default function App() {
           }
         }}>
         <Perf position="top-left" />
+        <axesHelper args={[5]} />
         <Environment background files="/night.hdr" />
         <Lights />
-        <Physics timeStep="vary">
-          <KeyboardControls map={keyboardMap} />
-          <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}>
-            <Ecctrl
-              debug
-              followLight
-            >
-              <CharacterModel />
-            </Ecctrl>
-            {/* <Map /> */}
-            <Ground />
-          </Suspense>
+        <Physics>
+          <KeyboardControls map={keyboardMap}>
+            <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}>
+              <Ecctrl
+                debug
+                followLight
+                characterURL={"/player.glb"}
+                animationSet={animationSet}
+              >
+                <CharacterModel />
+              </Ecctrl>
+              {/* <Map /> */}
+              <Ground />
+            </Suspense>
+          </KeyboardControls>
         </Physics>
       </Canvas>
     </>
