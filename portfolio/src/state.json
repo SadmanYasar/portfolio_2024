@@ -22,7 +22,7 @@
                 "__debugName": "Plane:[\"position\",\"y\"]",
                 "keyframes": [
                   {
-                    "id": "HGm5Dewjt3",
+                    "id": "Cr4h7w2K-6",
                     "position": 0,
                     "connectedRight": true,
                     "handles": [
@@ -31,19 +31,7 @@
                       0.5,
                       0
                     ],
-                    "value": -1.8
-                  },
-                  {
-                    "id": "luCl4qgyln",
-                    "position": 4.033,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "value": -1.8
+                    "value": -5.3
                   }
                 ]
               }
@@ -57,32 +45,7 @@
               "xLufEwnWOv": {
                 "type": "BasicKeyframedTrack",
                 "__debugName": "Player:[\"position\",\"y\"]",
-                "keyframes": [
-                  {
-                    "id": "sgbqoDcdju",
-                    "position": 0,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "value": 3.9999999999999845
-                  },
-                  {
-                    "id": "sbdaEIYRLu",
-                    "position": 4.033,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "value": 0
-                  }
-                ]
+                "keyframes": []
               }
             },
             "trackIdByPropPath": {
@@ -95,6 +58,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "JhmN793oyW6ynBU-",
     "BCsL1WG6ylFiDvon"
   ]
 }
