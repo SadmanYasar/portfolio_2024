@@ -1,0 +1,100 @@
+{
+  "sheetsById": {
+    "Demo Sheet": {
+      "staticOverrides": {
+        "byObject": {
+          "Plane": {
+            "position": {
+              "y": -2.6700000000000066
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 10,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Plane": {
+            "trackData": {
+              "QRF8OgYewt": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Plane:[\"position\",\"y\"]",
+                "keyframes": [
+                  {
+                    "id": "HGm5Dewjt3",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "value": -1.8
+                  },
+                  {
+                    "id": "luCl4qgyln",
+                    "position": 4.033,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "value": -1.8
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"y\"]": "QRF8OgYewt"
+            }
+          },
+          "Player": {
+            "trackData": {
+              "xLufEwnWOv": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Player:[\"position\",\"y\"]",
+                "keyframes": [
+                  {
+                    "id": "sgbqoDcdju",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "value": 3.9999999999999845
+                  },
+                  {
+                    "id": "sbdaEIYRLu",
+                    "position": 4.033,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "value": 0
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"y\"]": "xLufEwnWOv"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": [
+    "BCsL1WG6ylFiDvon"
+  ]
+}

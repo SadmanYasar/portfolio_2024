@@ -1,6 +1,6 @@
 import React from 'react';
-import { Plane } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
+import { editable as e } from '@theatre/r3f'
 
 export default function Ground() {
 
@@ -17,10 +17,10 @@ export default function Ground() {
         //     </mesh>
         // </RigidBody>
         <RigidBody type="fixed" ccd>
-            <mesh receiveShadow position={[0, -3.5, 0]}>
-                <boxGeometry args={[300, 20, 300]} />
-                <meshStandardMaterial color="lightblue" />
-            </mesh>
+            <e.mesh theatreKey="Plane" receiveShadow position={[0, -5.3, 0]}>
+                <boxGeometry args={[50, 10, 50]} />
+                <meshStandardMaterial color="lightblue" metalness={0.3} roughness={0.2} />
+            </e.mesh>
         </RigidBody>
     );
 }

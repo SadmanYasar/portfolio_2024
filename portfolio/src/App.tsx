@@ -1,22 +1,27 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { Environment, KeyboardControls } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Ecctrl, { EcctrlAnimation, EcctrlJoystick } from 'ecctrl'
+import { getProject } from '@theatre/core'
+import studio from '@theatre/studio'
+import extension from '@theatre/r3f/dist/extension'
+import { editable as e, SheetProvider } from '@theatre/r3f'
+import demoProjectState from './state.json'
+
+// our Theatre.js project sheet, we'll use this later
+const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
+
+// Vite
+if (import.meta.env.DEV) {
+  studio.initialize()
+  studio.extend(extension)
+}
 
 import Lights from './Lights'
 // import Map from './Map'
 import CharacterModel from './CharacterModel'
 import Ground from './Plane'
-
-function Loading() {
-  return (
-    <>
-      Loading...
-    </>
-  )
-}
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -39,6 +44,11 @@ const EcctrlJoystickControls = () => {
 }
 
 export default function App() {
+
+  // useEffect(() => {
+  //   demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: 1 }))
+  // }, [])
+
   const characterURL = "./sayem-animated.glb"
 
   const keyboardMap = [
@@ -60,6 +70,8 @@ export default function App() {
     fall: 'Falling_Idle'
   }
 
+
+
   return (
     <>
       <EcctrlJoystickControls />
@@ -71,33 +83,36 @@ export default function App() {
           far: 1000,
         }}
         onPointerDown={(e) => {
-          if (e.pointerType === 'mouse') {
-            (e.target as HTMLCanvasElement).requestPointerLock()
-          }
+          // if (e.pointerType === 'mouse') {
+          //   (e.target as HTMLCanvasElement).requestPointerLock()
+          // }
         }}>
-        <Perf position="top-left" />
-        <axesHelper args={[5]} />
-        <Environment background files="/night.hdr" />
-        <Lights />
-        <Physics timeStep={"vary"}>
-          <KeyboardControls map={keyboardMap}>
-            {/* <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}> */}
-            <Ecctrl
-              debug
-              animated
-            >
-              <EcctrlAnimation
-                characterURL={characterURL} // Must have property
-                animationSet={animationSet} // Must have property
+        <SheetProvider sheet={demoSheet}>
+          {/* <Perf position="top-left" minimal /> */}
+          <axesHelper args={[5]} />
+          <Environment background files="/night.hdr" />
+          <Lights />
+          <Physics debug={true} timeStep={"vary"} >
+            <KeyboardControls map={keyboardMap}>
+              {/* <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}> */}
+              <Ecctrl
+                debug
+                animated
+                position={[0, 11, 0]}
               >
-                <CharacterModel />
-              </EcctrlAnimation>
-            </Ecctrl>
-            {/* <Map /> */}
-            {/* </Suspense> */}
-          </KeyboardControls>
-          <Ground />
-        </Physics>
+                <EcctrlAnimation
+                  characterURL={characterURL} // Must have property
+                  animationSet={animationSet} // Must have property
+                >
+                  <CharacterModel />
+                </EcctrlAnimation>
+              </Ecctrl>
+              {/* <Map /> */}
+              {/* </Suspense> */}
+            </KeyboardControls>
+            <Ground />
+          </Physics>
+        </SheetProvider>
       </Canvas>
     </>
   )

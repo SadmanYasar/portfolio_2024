@@ -13,17 +13,21 @@
     "@react-three/drei": "^9.97.5",
     "@react-three/fiber": "^8.15.16",
     "@react-three/rapier": "^1.2.1",
+    "@theatre/core": "^0.5.1",
+    "@theatre/r3f": "^0.5.1",
+    "@theatre/studio": "^0.5.1",
     "@use-gesture/core": "^10.3.0",
     "ecctrl": "^1.0.64",
     "leva": "^0.9.35",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.161.0"
+    "three": "^0.145.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/three": "^0.149.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
