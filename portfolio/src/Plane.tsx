@@ -1,4 +1,3 @@
-import React from 'react';
 import { RigidBody } from '@react-three/rapier';
 import { editable as e } from '@theatre/r3f'
 
