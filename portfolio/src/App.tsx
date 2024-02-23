@@ -1,12 +1,12 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Environment, KeyboardControls } from '@react-three/drei'
+import { Environment, KeyboardControls, Loader } from '@react-three/drei'
 import { useEffect, useState } from 'react'
 import Ecctrl, { EcctrlAnimation, EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
 import studio from '@theatre/studio'
 import extension from '@theatre/r3f/dist/extension'
-import { editable as e, SheetProvider } from '@theatre/r3f'
+import { SheetProvider } from '@theatre/r3f'
 import demoProjectState from './state.json'
 
 // our Theatre.js project sheet, we'll use this later
@@ -83,9 +83,9 @@ export default function App() {
           far: 1000,
         }}
         onPointerDown={(e) => {
-          // if (e.pointerType === 'mouse') {
-          //   (e.target as HTMLCanvasElement).requestPointerLock()
-          // }
+          if (e.pointerType === 'mouse') {
+            (e.target as HTMLCanvasElement).requestPointerLock()
+          }
         }}>
         <SheetProvider sheet={demoSheet}>
           {/* <Perf position="top-left" minimal /> */}
@@ -114,6 +114,7 @@ export default function App() {
           </Physics>
         </SheetProvider>
       </Canvas>
+      <Loader />
     </>
   )
 }
