@@ -1,8 +1,8 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Environment, KeyboardControls, Loader } from '@react-three/drei'
-import { useEffect, useState } from 'react'
-import Ecctrl, { EcctrlAnimation, EcctrlJoystick } from 'ecctrl'
+import { Environment, KeyboardControls, Loader, Sphere } from '@react-three/drei'
+import { Suspense, useEffect, useState } from 'react'
+import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
 import studio from '@theatre/studio'
 import extension from '@theatre/r3f/dist/extension'
@@ -20,8 +20,11 @@ if (import.meta.env.DEV) {
 
 import Lights from './Lights'
 // import Map from './Map'
-import CharacterModel from './CharacterModel'
 import Ground from './Plane'
+import { Perf } from 'r3f-perf'
+import { Gradient, LayerMaterial } from 'lamina'
+import * as THREE from 'three'
+import Player from './Player'
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -49,8 +52,6 @@ export default function App() {
   //   demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: 1 }))
   // }, [])
 
-  const characterURL = "./sayem-animated.glb"
-
   const keyboardMap = [
     { name: "forward", keys: ["ArrowUp", "KeyW"] },
     { name: "backward", keys: ["ArrowDown", "KeyS"] },
@@ -59,18 +60,6 @@ export default function App() {
     { name: "jump", keys: ["Space"] },
     { name: "run", keys: ["Shift"] },
   ];
-
-  const animationSet = {
-    idle: 'Idle',
-    walk: 'Walk',
-    run: 'Running',
-    jump: 'Jump_Start',
-    jumpIdle: 'Falling_Idle',
-    jumpLand: 'Jump_Land',
-    fall: 'Falling_Idle'
-  }
-
-
 
   return (
     <>
@@ -87,28 +76,33 @@ export default function App() {
             (e.target as HTMLCanvasElement).requestPointerLock()
           }
         }}>
+        {/* <ContactShadows position={[0, -0.2, 0]} far={1000} /> */}
         <SheetProvider sheet={demoSheet}>
-          {/* <Perf position="top-left" minimal /> */}
-          <axesHelper args={[5]} />
-          <Environment background files="/night.hdr" />
+          <Perf position="top-left" minimal />
+          <axesHelper args={[3]} />
+          <Environment preset='forest' />
+          <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
+            <LayerMaterial
+              // lighting='physical'
+              // transmission={1}
+              side={THREE.BackSide}
+            >
+              <Gradient
+                colorA={"magenta"}
+                colorB={"blue"}
+                axes='y'
+                start={0}
+                end={0.4}
+              />
+            </LayerMaterial>
+          </Sphere>
+          {/* <Stars /> */}
           <Lights />
-          <Physics debug={true} timeStep={"vary"} >
+          <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
-              {/* <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}> */}
-              <Ecctrl
-                debug
-                animated
-                position={[0, 11, 0]}
-              >
-                <EcctrlAnimation
-                  characterURL={characterURL} // Must have property
-                  animationSet={animationSet} // Must have property
-                >
-                  <CharacterModel />
-                </EcctrlAnimation>
-              </Ecctrl>
-              {/* <Map /> */}
-              {/* </Suspense> */}
+              <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}>
+                <Player />
+              </Suspense>
             </KeyboardControls>
             <Ground />
           </Physics>

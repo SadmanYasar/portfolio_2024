@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "dev:r3f": "vite --host",
     "dev": "tinacms dev -c \"vite --host\"",
     "build": "tinacms build && tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -19,6 +20,7 @@
     "@types/three": "^0.161.2",
     "@use-gesture/core": "^10.3.0",
     "ecctrl": "^1.0.64",
+    "lamina": "^1.1.23",
     "leva": "^0.9.35",
     "lottie-react": "^2.4.0",
     "r3f-perf": "^7.1.2",

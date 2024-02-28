@@ -3,27 +3,27 @@
 // @ts-nocheck
 
 import { useRef } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, ContactShadows } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { editable as e } from '@theatre/r3f'
 
 export default function CharacterModel(props) {
-    const group = useRef();
+    // const group = useRef();
     const { nodes, materials, animations } = useGLTF("/sayem-animated.glb");
-    const { actions } = useAnimations(animations, group);
+    // const { actions } = useAnimations(animations, group);
 
     //reset position if out of bounds
-    useFrame(() => {
-        if (group.current.position.y < -1) {
-            group.current.position.y = 0;
-            group.current.position.x = 0;
-            group.current.position.z = 0;
-        }
-    }
-    );
+    // useFrame(() => {
+    //     if (group.current.position.y < -10) {
+    //         group.current.position.y = 0;
+    //         group.current.position.x = 0;
+    //         group.current.position.z = 0;
+    //     }
+    // }
+    // );
 
     return (
-        <e.group theatreKey="Player" ref={group} {...props} dispose={null} position={[0, -0.8, 0]} scale={[1, 1, 1]}>
+        <e.group theatreKey="Player" {...props} dispose={null} position={[0, -0.8, 0]} scale={[1, 1, 1]} >
             <group name="Scene">
                 <group name="Armature">
                     <skinnedMesh

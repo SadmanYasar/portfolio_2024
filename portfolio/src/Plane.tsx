@@ -16,9 +16,9 @@ export default function Ground() {
         //     </mesh>
         // </RigidBody>
         <RigidBody type="fixed" ccd>
-            <e.mesh theatreKey="Plane" receiveShadow position={[0, -5.3, 0]}>
+            <e.mesh theatreKey="Plane" castShadow receiveShadow position={[0, -5.3, 0]}>
                 <boxGeometry args={[50, 10, 50]} />
-                <meshStandardMaterial color="lightblue" metalness={0.3} roughness={0.2} />
+                <meshPhongMaterial color="#ff0000" opacity={0} transparent />
             </e.mesh>
         </RigidBody>
     );
