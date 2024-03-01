@@ -1,13 +1,16 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Environment, KeyboardControls, Loader } from '@react-three/drei'
-import { useEffect, useState } from 'react'
-import Ecctrl, { EcctrlAnimation, EcctrlJoystick } from 'ecctrl'
+import { Billboard, Environment, Image, KeyboardControls, Loader, Sphere } from '@react-three/drei'
+import { Suspense, useEffect, useState } from 'react'
+import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
 import studio from '@theatre/studio'
 import extension from '@theatre/r3f/dist/extension'
 import { SheetProvider } from '@theatre/r3f'
 import demoProjectState from './state.json'
+import { editable as e } from '@theatre/r3f'
+import nyan from "./assets/nyan.png"
+import strat from "./assets/strat.png"
 
 // our Theatre.js project sheet, we'll use this later
 const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
@@ -20,8 +23,10 @@ if (import.meta.env.DEV) {
 
 import Lights from './Lights'
 // import Map from './Map'
-import CharacterModel from './CharacterModel'
 import Ground from './Plane'
+import { Gradient, LayerMaterial } from 'lamina'
+import * as THREE from 'three'
+import Player from './Player'
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -49,8 +54,6 @@ export default function App() {
   //   demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: 1 }))
   // }, [])
 
-  const characterURL = "./sayem-animated.glb"
-
   const keyboardMap = [
     { name: "forward", keys: ["ArrowUp", "KeyW"] },
     { name: "backward", keys: ["ArrowDown", "KeyS"] },
@@ -59,18 +62,6 @@ export default function App() {
     { name: "jump", keys: ["Space"] },
     { name: "run", keys: ["Shift"] },
   ];
-
-  const animationSet = {
-    idle: 'Idle',
-    walk: 'Walk',
-    run: 'Running',
-    jump: 'Jump_Start',
-    jumpIdle: 'Falling_Idle',
-    jumpLand: 'Jump_Land',
-    fall: 'Falling_Idle'
-  }
-
-
 
   return (
     <>
@@ -87,33 +78,57 @@ export default function App() {
             (e.target as HTMLCanvasElement).requestPointerLock()
           }
         }}>
+        {/* <ContactShadows position={[0, -0.2, 0]} far={1000} /> */}
         <SheetProvider sheet={demoSheet}>
           {/* <Perf position="top-left" minimal /> */}
-          <axesHelper args={[5]} />
-          <Environment background files="/night.hdr" />
+          {/* <axesHelper args={[3]} /> */}
+          <Environment preset='forest' />
+          <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
+            <LayerMaterial
+              // lighting='physical'
+              // transmission={1}
+              side={THREE.BackSide}
+            >
+              <Gradient
+                colorA={"magenta"}
+                colorB={"blue"}
+                axes='y'
+                start={0}
+                end={0.4}
+              />
+            </LayerMaterial>
+          </Sphere>
+          {/* <Stars /> */}
           <Lights />
-          <Physics debug={true} timeStep={"vary"} >
+          <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
-              {/* <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}> */}
-              <Ecctrl
-                debug
-                animated
-                position={[0, 11, 0]}
-              >
-                <EcctrlAnimation
-                  characterURL={characterURL} // Must have property
-                  animationSet={animationSet} // Must have property
-                >
-                  <CharacterModel />
-                </EcctrlAnimation>
-              </Ecctrl>
-              {/* <Map /> */}
-              {/* </Suspense> */}
+              <Suspense fallback={<Billboard>
+                <e.group theatreKey='nyancatLoader'>
+                  <Image url={nyan} transparent position={[0, 0, 0]} />
+                </e.group>
+              </Billboard>}>
+                <Player />
+              </Suspense>
             </KeyboardControls>
             <Ground />
           </Physics>
+          {/* <mesh>
+              <Html position={[0, -0.8, 10]} transform occlude="raycast">
+                <div>
+                  <img src='https://media.tenor.com/5Z5h-ffbqj0AAAAj/%D0%BA%D0%BE%D1%82%D1%83%D1%81%D0%BB%D0%B5%D1%82%D0%BE%D1%83%D1%81.gif' className="w-64 h-64 object-cover" />
+                </div>
+              </Html>
+            </mesh> */}
+          <Billboard>
+            <e.group theatreKey='nyancat'>
+              <Image url={nyan} transparent />
+            </e.group>
+            <e.group theatreKey='strat'>
+              <Image url={strat} transparent zoom={0.35} />
+            </e.group>
+          </Billboard>
         </SheetProvider>
-      </Canvas>
+      </Canvas >
       <Loader />
     </>
   )

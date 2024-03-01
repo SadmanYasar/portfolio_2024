@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "dev:withTina": "tinacms dev -c \"vite --host\"",
     "dev": "vite --host",
+    "build:withTina": "tinacms build && tsc && vite build",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -19,14 +21,18 @@
     "@types/three": "^0.161.2",
     "@use-gesture/core": "^10.3.0",
     "ecctrl": "^1.0.64",
+    "lamina": "^1.1.23",
     "leva": "^0.9.35",
     "lottie-react": "^2.4.0",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.161.0"
+    "three": "^0.161.0",
+    "tinacms": "^1.5.28"
   },
   "devDependencies": {
+    "@tinacms/cli": "^1.5.39",
+    "@types/node": "^20.11.20",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
