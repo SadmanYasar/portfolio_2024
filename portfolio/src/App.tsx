@@ -81,8 +81,8 @@ export default function App() {
         }}>
         {/* <ContactShadows position={[0, -0.2, 0]} far={1000} /> */}
         <SheetProvider sheet={demoSheet}>
-          <Perf position="top-left" minimal />
-          <axesHelper args={[3]} />
+          {/* <Perf position="top-left" minimal /> */}
+          {/* <axesHelper args={[3]} /> */}
           <Environment preset='forest' />
           <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
             <LayerMaterial
@@ -103,7 +103,11 @@ export default function App() {
           <Lights />
           <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
-              <Suspense fallback={<capsuleGeometry args={[0.3, 0.7]} />}>
+              <Suspense fallback={<Billboard>
+                <e.group theatreKey='nyancatLoader'>
+                  <Image url={nyan} transparent position={[0, 0, 0]} />
+                </e.group>
+              </Billboard>}>
                 <Player />
               </Suspense>
             </KeyboardControls>
