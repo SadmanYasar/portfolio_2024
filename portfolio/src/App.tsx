@@ -102,11 +102,7 @@ export default function App() {
           <Lights />
           <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
-              <Suspense fallback={<Billboard>
-                <e.group theatreKey='nyancatLoader'>
-                  <Image url={nyan} transparent position={[0, 0, 0]} />
-                </e.group>
-              </Billboard>}>
+              <Suspense fallback={null}>
                 <Player />
               </Suspense>
             </KeyboardControls>
@@ -115,7 +111,7 @@ export default function App() {
           {/* <mesh>
               <Html position={[0, -0.8, 10]} transform occlude="raycast">
                 <div>
-                  <img src='https://media.tenor.com/5Z5h-ffbqj0AAAAj/%D0%BA%D0%BE%D1%82%D1%83%D1%81%D0%BB%D0%B5%D1%82%D0%BE%D1%83%D1%81.gif' className="w-64 h-64 object-cover" />
+                  <img src='https://media.tenor.com/5Z5h-ffbqj0AAAAj/%D0%BA%D0%BE%D1%82%D1%83%D1%81%D0%BB%D0%B5%D1%82%D0%BE%D1%83%D1%81.gif' className="object-cover w-64 h-64" />
                 </div>
               </Html>
             </mesh> */}
