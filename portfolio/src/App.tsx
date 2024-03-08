@@ -27,6 +27,7 @@ import Ground from './Plane'
 import { Gradient, LayerMaterial } from 'lamina'
 import * as THREE from 'three'
 import Player from './Player'
+import PopCat from './PopCat'
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -106,6 +107,9 @@ export default function App() {
                 <Player />
               </Suspense>
             </KeyboardControls>
+            <Suspense fallback={null}>
+              <PopCat />
+            </Suspense>
             <Ground />
           </Physics>
           {/* <mesh>

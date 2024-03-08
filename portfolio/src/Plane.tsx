@@ -21,7 +21,7 @@ export default function Ground() {
                 <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />
             </e.mesh>
 
-            <e.mesh theatreKey="Plane About" castShadow receiveShadow position={[10, -5.3, 0]}>
+            {/* <e.mesh theatreKey="Plane About" castShadow receiveShadow position={[10, -5.3, 0]}>
                 <boxGeometry args={[10, 10, 10]} />
                 <meshPhongMaterial color="#ff0000" opacity={0.1} transparent />
             </e.mesh>
@@ -34,7 +34,7 @@ export default function Ground() {
             <e.mesh theatreKey="Plane Projects" castShadow receiveShadow position={[10, -5.3, 10]}>
                 <boxGeometry args={[10, 10, 10]} />
                 <meshPhongMaterial color="#ff0000" opacity={0} transparent />
-            </e.mesh>
+            </e.mesh> */}
         </RigidBody>
     );
 }
