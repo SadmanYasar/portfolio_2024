@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Billboard, Environment, Image, KeyboardControls, Loader, Sphere } from '@react-three/drei'
+import { Billboard, ContactShadows, Environment, Image, KeyboardControls, Loader, Sphere, Stars, Stats } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
@@ -28,6 +28,7 @@ import { Gradient, LayerMaterial } from 'lamina'
 import * as THREE from 'three'
 import Player from './Player'
 import PopCat from './PopCat'
+import ViceCity from './Vice_city_map'
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -76,15 +77,16 @@ export default function App() {
         }}
         onPointerDown={(e) => {
           if (e.pointerType === 'mouse') {
-            (e.target as HTMLCanvasElement).requestPointerLock()
+            // (e.target as HTMLCanvasElement).requestPointerLock()
           }
         }}>
-        {/* <ContactShadows position={[0, -0.2, 0]} far={1000} /> */}
+        <color attach={'background'} args={['black']} />
+        {/* <ContactShadows  /> */}
         <SheetProvider sheet={demoSheet}>
           {/* <Perf position="top-left" minimal /> */}
           {/* <axesHelper args={[3]} /> */}
-          <Environment preset='forest' />
-          <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
+          <Environment preset='night' />
+          {/* <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
             <LayerMaterial
               // lighting='physical'
               // transmission={1}
@@ -98,9 +100,10 @@ export default function App() {
                 end={0.4}
               />
             </LayerMaterial>
-          </Sphere>
+          </Sphere> */}
           {/* <Stars /> */}
           <Lights />
+          <Stats />
           <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
               <Suspense fallback={null}>
@@ -110,7 +113,8 @@ export default function App() {
             <Suspense fallback={null}>
               <PopCat />
             </Suspense>
-            <Ground />
+            {/* <Ground /> */}
+            <ViceCity />
           </Physics>
           {/* <mesh>
               <Html position={[0, -0.8, 10]} transform occlude="raycast">
