@@ -12,7 +12,7 @@ export default function Model(props) {
     const { nodes, materials, animations } = useGLTF("/Sayem_Real_2.glb");
     const { actions } = useAnimations(animations, group);
     return (
-        <group ref={group} {...props} position={[0, -0.8, 0]} scale={[1, 1, 1]} dispose={null} castShadow>
+        <group ref={group} {...props} position={[0, -0.9, 0]} scale={[1, 1, 1]} dispose={null} castShadow>
             <group name="Scene">
                 <group name="Armature">
                     <skinnedMesh

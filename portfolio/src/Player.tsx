@@ -23,7 +23,7 @@ export default function Player() {
             const position = (ref.current).translation()
 
             // Reset
-            if (position.y < - 6) {
+            if (position.y < - 3) {
                 reset()
             }
         }
@@ -42,7 +42,7 @@ export default function Player() {
             ref={ref}
             debug
             animated
-            position={[0, 11, 0]}
+            position={[26, 11, -15]}
         >
             <EcctrlAnimation
                 characterURL={characterURL} // Must have property

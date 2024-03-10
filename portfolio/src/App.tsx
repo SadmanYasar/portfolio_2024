@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Billboard, ContactShadows, Environment, Image, KeyboardControls, Loader, Sphere, Stars, Stats } from '@react-three/drei'
+import { Billboard, Environment, Image, KeyboardControls, Loader, Sphere, Stars, Stats } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
@@ -29,6 +29,8 @@ import * as THREE from 'three'
 import Player from './Player'
 import PopCat from './PopCat'
 import ViceCity from './Vice_city_map'
+import GroveStreet from './Grove_street'
+import Tommy from './Tommy-animated'
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -73,7 +75,7 @@ export default function App() {
         camera={{
           fov: 65,
           near: 0.1,
-          far: 1000,
+          far: 100,
         }}
         onPointerDown={(e) => {
           if (e.pointerType === 'mouse') {
@@ -111,10 +113,11 @@ export default function App() {
               </Suspense>
             </KeyboardControls>
             <Suspense fallback={null}>
-              <PopCat />
+              <Tommy />
             </Suspense>
             {/* <Ground /> */}
             <ViceCity />
+            <GroveStreet visible={false} />
           </Physics>
           {/* <mesh>
               <Html position={[0, -0.8, 10]} transform occlude="raycast">
