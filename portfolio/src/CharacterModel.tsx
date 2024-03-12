@@ -12,7 +12,7 @@ export default function Model(props) {
     const { nodes, materials, animations } = useGLTF("/Sayem_Real_2.glb");
     const { actions } = useAnimations(animations, group);
     return (
-        <group ref={group} {...props} position={[0, -0.8, 0]} scale={[1, 1, 1]} dispose={null}>
+        <e.group theatreKey="me" ref={group} {...props} position={[0, -0.9, 0]} scale={[1, 1, 1]} dispose={null} castShadow>
             <group name="Scene">
                 <group name="Armature">
                     <skinnedMesh
@@ -20,35 +20,40 @@ export default function Model(props) {
                         geometry={nodes.avaturn_body.geometry}
                         material={materials.avaturn_body_material}
                         skeleton={nodes.avaturn_body.skeleton}
+                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_hair_0"
                         geometry={nodes.avaturn_hair_0.geometry}
                         material={materials.avaturn_hair_0_material}
                         skeleton={nodes.avaturn_hair_0.skeleton}
+                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_hair_1"
                         geometry={nodes.avaturn_hair_1.geometry}
                         material={materials.avaturn_hair_1_material}
                         skeleton={nodes.avaturn_hair_1.skeleton}
+                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_look_0"
                         geometry={nodes.avaturn_look_0.geometry}
                         material={materials.avaturn_look_0_material}
                         skeleton={nodes.avaturn_look_0.skeleton}
+                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_shoes_0"
                         geometry={nodes.avaturn_shoes_0.geometry}
                         material={materials.avaturn_shoes_0_material}
                         skeleton={nodes.avaturn_shoes_0.skeleton}
+                        castShadow receiveShadow
                     />
                     <primitive object={nodes.Hips} />
                 </group>
             </group>
-        </group>
+        </e.group>
     );
 }
 

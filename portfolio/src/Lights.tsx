@@ -17,6 +17,7 @@ export default function Lights() {
                 castShadow
                 shadow-normalBias={0.06}
                 position={[20, 30, 10]}
+                color={'#931cff'}
                 intensity={1.5}
                 shadow-mapSize={[1024, 1024]}
                 shadow-camera-near={1}
@@ -26,8 +27,9 @@ export default function Lights() {
                 shadow-camera-bottom={-50}
                 shadow-camera-left={-50}
                 name="followLight"
-                // ref={directionalLightRef}
+            // ref={directionalLightRef}
             />
+            
             <ambientLight intensity={0.5} />
         </>
     );

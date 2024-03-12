@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Billboard, Environment, Image, KeyboardControls, Loader, Sphere } from '@react-three/drei'
+import { Billboard, Environment, Image, KeyboardControls, Loader } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
@@ -23,10 +23,9 @@ if (import.meta.env.DEV) {
 
 import Lights from './Lights'
 // import Map from './Map'
-import Ground from './Plane'
-import { Gradient, LayerMaterial } from 'lamina'
-import * as THREE from 'three'
 import Player from './Player'
+import ViceCity from './Vice_city_map'
+import Tommy from './Tommy-animated'
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -71,19 +70,20 @@ export default function App() {
         camera={{
           fov: 65,
           near: 0.1,
-          far: 1000,
+          far: 100,
         }}
         onPointerDown={(e) => {
           if (e.pointerType === 'mouse') {
             (e.target as HTMLCanvasElement).requestPointerLock()
           }
         }}>
-        {/* <ContactShadows position={[0, -0.2, 0]} far={1000} /> */}
+        <color attach={'background'} args={['black']} />
+        {/* <ContactShadows  /> */}
         <SheetProvider sheet={demoSheet}>
           {/* <Perf position="top-left" minimal /> */}
           {/* <axesHelper args={[3]} /> */}
-          <Environment preset='forest' />
-          <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
+          <Environment preset='night' />
+          {/* <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
             <LayerMaterial
               // lighting='physical'
               // transmission={1}
@@ -97,16 +97,22 @@ export default function App() {
                 end={0.4}
               />
             </LayerMaterial>
-          </Sphere>
+          </Sphere> */}
           {/* <Stars /> */}
           <Lights />
+          {/* <Stats /> */}
           <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
               <Suspense fallback={null}>
                 <Player />
               </Suspense>
             </KeyboardControls>
-            <Ground />
+            <Suspense fallback={null}>
+              <Tommy />
+            </Suspense>
+            {/* <Ground /> */}
+            <ViceCity />
+            {/* <GroveStreet visible={false} /> */}
           </Physics>
           {/* <mesh>
               <Html position={[0, -0.8, 10]} transform occlude="raycast">
