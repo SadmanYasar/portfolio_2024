@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Billboard, Environment, Image, KeyboardControls, Loader, Sphere, Stars, Stats } from '@react-three/drei'
+import { Billboard, Environment, Image, KeyboardControls, Loader } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
@@ -23,13 +23,8 @@ if (import.meta.env.DEV) {
 
 import Lights from './Lights'
 // import Map from './Map'
-import Ground from './Plane'
-import { Gradient, LayerMaterial } from 'lamina'
-import * as THREE from 'three'
 import Player from './Player'
-import PopCat from './PopCat'
 import ViceCity from './Vice_city_map'
-import GroveStreet from './Grove_street'
 import Tommy from './Tommy-animated'
 
 const EcctrlJoystickControls = () => {
@@ -79,7 +74,7 @@ export default function App() {
         }}
         onPointerDown={(e) => {
           if (e.pointerType === 'mouse') {
-            // (e.target as HTMLCanvasElement).requestPointerLock()
+            (e.target as HTMLCanvasElement).requestPointerLock()
           }
         }}>
         <color attach={'background'} args={['black']} />
@@ -105,7 +100,7 @@ export default function App() {
           </Sphere> */}
           {/* <Stars /> */}
           <Lights />
-          <Stats />
+          {/* <Stats /> */}
           <Physics timeStep={"vary"} >
             <KeyboardControls map={keyboardMap}>
               <Suspense fallback={null}>
@@ -117,7 +112,7 @@ export default function App() {
             </Suspense>
             {/* <Ground /> */}
             <ViceCity />
-            <GroveStreet visible={false} />
+            {/* <GroveStreet visible={false} /> */}
           </Physics>
           {/* <mesh>
               <Html position={[0, -0.8, 10]} transform occlude="raycast">

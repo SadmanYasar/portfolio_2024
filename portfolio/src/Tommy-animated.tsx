@@ -18,11 +18,11 @@ export default function Tommy(props) {
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
-    actions["Charge"].play();
+    actions["Idle"].play();
   }, [actions])
 
   return (
-    <e.group theatreKey='tommy' ref={group} {...props} dispose={null}>
+    <e.group theatreKey='tommy' ref={group} {...props} position={[17.7, -0.54, 1.54]} rotation={[-Math.PI, 1.52, Math.PI]} dispose={null}>
       <group name="Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.909}>
           <group name="Tommy_Vercettiobjcleanermaterialmergergles" />
