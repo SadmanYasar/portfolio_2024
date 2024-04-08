@@ -12,14 +12,14 @@ Title: GTA Vice City
 // @ts-nocheck
 
 import { useGLTF } from '@react-three/drei'
-import { editable as e } from '@theatre/r3f'
+// import { editable as e } from '@theatre/r3f'
 import { RigidBody } from '@react-three/rapier'
 
 export default function ViceCity(props) {
   const { nodes, materials } = useGLTF('/vice_city_map.glb')
   return (
     <RigidBody type='fixed' colliders='trimesh' scale={[0.8, 0.8, 0.8]} rotation={[0, 0, 0]}>
-      <e.group theatreKey='vice_city' {...props} scale={[0.8, 0.8, 0.8]} rotation={[0, 0, 0]} dispose={null}>
+      <group {...props} scale={[0.8, 0.8, 0.8]} rotation={[0, 0, 0]} dispose={null}>
         <group position={[14.75, -0.229, 2.557]}>
           <mesh geometry={nodes.Object_6.geometry} material={materials.building} />
           <mesh geometry={nodes.Object_7.geometry} material={materials.material_0} />
@@ -216,7 +216,7 @@ export default function ViceCity(props) {
         <mesh geometry={nodes.Object_385.geometry} material={materials.hotel_details} position={[16.757, 30.922, 8.391]} />
         <mesh geometry={nodes.Object_387.geometry} material={materials.hotel_details} position={[6.728, 20.112, 9.101]} />
         <mesh geometry={nodes.Object_389.geometry} material={materials.cheetah} position={[41.857, -0.064, 17.006]} rotation={[Math.PI, 0, Math.PI / 2]} />
-      </e.group>
+      </group>
     </RigidBody>
   )
 }

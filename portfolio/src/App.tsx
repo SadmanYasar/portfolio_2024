@@ -1,31 +1,33 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, extend } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { Billboard, Environment, Image, KeyboardControls, Loader } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
-import { getProject } from '@theatre/core'
-import studio from '@theatre/studio'
-import extension from '@theatre/r3f/dist/extension'
-import { SheetProvider } from '@theatre/r3f'
-import demoProjectState from './state.json'
-import { editable as e } from '@theatre/r3f'
-import nyan from "./assets/nyan.png"
-import strat from "./assets/strat.png"
+// import { getProject } from '@theatre/core'
+// import studio from '@theatre/studio'
+// import extension from '@theatre/r3f/dist/extension'
+// import { SheetProvider } from '@theatre/r3f'
+// import demoProjectState from './statjson'
+// import { editable as e } from '@theatre/r3f'
+// import nyan from "./assets/nyan.png"
+// import strat from "./assets/strat.png"
 
-// our Theatre.js project sheet, we'll use this later
-const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
+// our Theatrjs project sheet, we'll use this later
+// const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
 
 // Vite
-if (import.meta.env.DEV) {
-  studio.initialize()
-  studio.extend(extension)
-}
+// if (import.meta.env.DEV) {
+//   studio.initialize()
+//   studio.extend(extension)
+// }
 
-import Lights from './Lights'
+import Lights from './components/Lights'
 // import Map from './Map'
-import Player from './Player'
-import ViceCity from './Vice_city_map'
-import Tommy from './Tommy-animated'
+import Player from './components/Player'
+import ViceCity from './components/Vice_city_map'
+import Tommy from './components/Tommy-animated'
+
+extend({ Canvas })
 
 const EcctrlJoystickControls = () => {
   const [isTouchScreen, setIsTouchScreen] = useState(false)
@@ -50,7 +52,7 @@ const EcctrlJoystickControls = () => {
 export default function App() {
 
   // useEffect(() => {
-  //   demoSheet.project.ready.then(() => demoSheet.sequence.play({ iterationCount: 1 }))
+  //   demoSheet.project.ready.then(() => demoSheet.sequencplay({ iterationCount: 1 }))
   // }, [])
 
   const keyboardMap = [
@@ -64,8 +66,8 @@ export default function App() {
 
   return (
     <>
-      <EcctrlJoystickControls />
-      <Canvas
+      {/* <EcctrlJoystickControls /> */}
+      {/* <Canvas
         shadows
         camera={{
           fov: 65,
@@ -73,21 +75,21 @@ export default function App() {
           far: 100,
         }}
         onPointerDown={(e) => {
-          if (e.pointerType === 'mouse') {
-            (e.target as HTMLCanvasElement).requestPointerLock()
-          }
-        }}>
-        <color attach={'background'} args={['black']} />
-        {/* <ContactShadows  /> */}
-        <SheetProvider sheet={demoSheet}>
-          {/* <Perf position="top-left" minimal /> */}
-          {/* <axesHelper args={[3]} /> */}
-          <Environment preset='night' />
-          {/* <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
+          // if (pointerType === 'mouse') {
+          //   (target as HTMLCanvasElement).requestPointerLock()
+          // }
+        }}> */}
+      <color attach={'background'} args={['black']} />
+      {/* <ContactShadows  /> */}
+      {/* <SheetProvider sheet={demoSheet}> */}
+      {/* <Perf position="top-left" minimal /> */}
+      {/* <axesHelper args={[3]} /> */}
+      <Environment preset='night' />
+      {/* <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
             <LayerMaterial
               // lighting='physical'
               // transmission={1}
-              side={THREE.BackSide}
+              side={THREBackSide}
             >
               <Gradient
                 colorA={"magenta"}
@@ -98,40 +100,40 @@ export default function App() {
               />
             </LayerMaterial>
           </Sphere> */}
-          {/* <Stars /> */}
-          <Lights />
-          {/* <Stats /> */}
-          <Physics timeStep={"vary"} >
-            <KeyboardControls map={keyboardMap}>
-              <Suspense fallback={null}>
-                <Player />
-              </Suspense>
-            </KeyboardControls>
-            <Suspense fallback={null}>
-              <Tommy />
-            </Suspense>
-            {/* <Ground /> */}
-            <ViceCity />
-            {/* <GroveStreet visible={false} /> */}
-          </Physics>
-          {/* <mesh>
+      {/* <Stars /> */}
+      <Lights />
+      {/* <Stats /> */}
+      <Physics timeStep={"vary"} >
+        <KeyboardControls map={keyboardMap}>
+          {/* <Suspense fallback={null}>
+          </Suspense> */}
+          <Player />
+        </KeyboardControls>
+        <Suspense fallback={null}>
+          <Tommy />
+        </Suspense>
+        {/* <Ground /> */}
+        <ViceCity />
+        {/* <GroveStreet visible={false} /> */}
+      </Physics>
+      {/* <mesh>
               <Html position={[0, -0.8, 10]} transform occlude="raycast">
                 <div>
                   <img src='https://media.tenor.com/5Z5h-ffbqj0AAAAj/%D0%BA%D0%BE%D1%82%D1%83%D1%81%D0%BB%D0%B5%D1%82%D0%BE%D1%83%D1%81.gif' className="object-cover w-64 h-64" />
                 </div>
               </Html>
             </mesh> */}
-          <Billboard>
-            <e.group theatreKey='nyancat'>
-              <Image url={nyan} transparent />
-            </e.group>
-            <e.group theatreKey='strat'>
-              <Image url={strat} transparent zoom={0.35} />
-            </e.group>
-          </Billboard>
-        </SheetProvider>
-      </Canvas >
-      <Loader />
+      {/* <Billboard>
+          <group>
+            <Image url={nyan} transparent />
+          </group>
+          <group>
+            <Image url={strat} transparent zoom={0.35} />
+          </group>
+        </Billboard> */}
+      {/* </SheetProvider> */}
+      {/* </Canvas > */}
+      {/* <Loader /> */}
     </>
   )
 }

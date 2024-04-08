@@ -9,7 +9,7 @@ Command: npx gltfjsx@6.2.16 .\tommy-animated.glb
 
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { editable as e } from '@theatre/r3f'
+// import { editable as e } from '@theatre/r3f'
 import { RigidBody } from '@react-three/rapier'
 
 export default function Tommy(props) {
@@ -22,7 +22,7 @@ export default function Tommy(props) {
   }, [actions])
 
   return (
-    <e.group theatreKey='tommy' ref={group} {...props} position={[17.7, -0.54, 1.54]} rotation={[-Math.PI, 1.52, Math.PI]} dispose={null}>
+    <group theatreKey='tommy' ref={group} {...props} position={[17.7, -0.54, 1.54]} rotation={[-Math.PI, 1.52, Math.PI]} dispose={null}>
       <group name="Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.909}>
           <group name="Tommy_Vercettiobjcleanermaterialmergergles" />
@@ -32,7 +32,7 @@ export default function Tommy(props) {
           <skinnedMesh name="tommy" geometry={nodes.tommy.geometry} material={materials.Tommy} skeleton={nodes.tommy.skeleton} />
         </group>
       </group>
-    </e.group>
+    </group>
   )
 }
 

@@ -12,7 +12,7 @@ Title: POP CAT
 
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { editable as e } from '@theatre/r3f'
+// import { editable as e } from '@theatre/r3f'
 
 export default function PopCat(props) {
     const group = useRef();
@@ -24,7 +24,7 @@ export default function PopCat(props) {
     }, [actions]);
 
     return (
-        <e.group theatreKey="PopCat" ref={group} {...props} scale={[0.05, 0.05, 0.05]} dispose={null}>
+        <group ref={group} {...props} scale={[0.05, 0.05, 0.05]} dispose={null}>
             <group name="Sketchfab_Scene">
                 <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
                     <group name="root">
@@ -76,7 +76,7 @@ export default function PopCat(props) {
                     </group>
                 </group>
             </group>
-        </e.group>
+        </group>
     );
 }
 

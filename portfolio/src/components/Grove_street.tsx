@@ -12,18 +12,18 @@ Title: Grand theft auto San Andreas | Grove street
 // @ts-nocheck
 
 import { useGLTF } from '@react-three/drei'
-import { editable as e } from '@theatre/r3f'
+// import { editable as e } from '@theatre/r3f'
 
 export default function GroveStreet(props) {
   const { nodes, materials } = useGLTF('/grove_street.glb')
   return (
-    <e.group theatreKey='grove_street' {...props} dispose={null}>
+    <group theatreKey='grove_street' {...props} dispose={null}>
       <group position={[27.994, 5.807, -1.12]}>
         <mesh geometry={nodes.Object_4.geometry} material={materials.color} />
         <mesh geometry={nodes.Object_5.geometry} material={materials.color} />
         <mesh geometry={nodes.Object_6.geometry} material={materials.color} />
       </group>
-    </e.group>
+    </group>
   )
 }
 

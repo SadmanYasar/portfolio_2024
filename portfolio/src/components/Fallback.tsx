@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react';
-import animationData from './lotties/rocket-loading.json';
+import animationData from '../lotties/rocket-loading.json';
 
 export default function Fallback() {
     return (

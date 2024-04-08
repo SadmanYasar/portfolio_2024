@@ -38,20 +38,22 @@ export default function Player() {
     }
 
     return (
-        <Ecctrl
-            ref={ref}
-            // debug
-            animated
-            // position={[26, -0.54, 1.54]}
-            position={[24, -0.54, 3]}
-            camInitDir={{ x: 0, y: -2.09, z: 0 }}
-        >
-            <EcctrlAnimation
-                characterURL={characterURL} // Must have property
-                animationSet={animationSet} // Must have property
+        <>
+            <Ecctrl
+                ref={ref}
+                // debug
+                animated
+                // position={[26, -0.54, 1.54]}
+                position={[24, -0.54, 3]}
+                camInitDir={{ x: 0, y: -2.09, z: 0 }}
             >
-                <CharacterModel />
-            </EcctrlAnimation>
-        </Ecctrl>
+                <EcctrlAnimation
+                    characterURL={characterURL} // Must have property
+                    animationSet={animationSet} // Must have property
+                >
+                    <CharacterModel />
+                </EcctrlAnimation>
+            </Ecctrl>
+        </>
     )
 }

@@ -12,13 +12,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.97.5",
-    "@react-three/fiber": "^8.15.16",
+    "@react-three/drei": "^9.87.0",
+    "@react-three/fiber": "^8.14.5",
     "@react-three/rapier": "^1.2.1",
     "@theatre/core": "^0.7.0",
     "@theatre/r3f": "^0.7.0",
     "@theatre/studio": "^0.7.0",
-    "@types/three": "^0.161.2",
+    "@types/three": "^0.157.0",
     "@use-gesture/core": "^10.3.0",
     "ecctrl": "^1.0.64",
     "lamina": "^1.1.23",
@@ -27,8 +27,9 @@
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.161.0",
-    "tinacms": "^1.5.28"
+    "three": "^0.157.0",
+    "tinacms": "^1.5.28",
+    "@types/react": "^18.2.25"
   },
   "devDependencies": {
     "@tinacms/cli": "^1.5.39",
