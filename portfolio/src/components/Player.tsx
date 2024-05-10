@@ -41,7 +41,7 @@ export default function Player() {
         <>
             <Ecctrl
                 ref={ref}
-                // debug
+                debug
                 animated
                 // position={[26, -0.54, 1.54]}
                 position={[24, -0.54, 3]}

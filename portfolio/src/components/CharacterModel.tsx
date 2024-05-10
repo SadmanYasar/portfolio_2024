@@ -8,11 +8,11 @@ import { useFrame } from "@react-three/fiber";
 import { editable as e } from '@theatre/r3f'
 
 export default function Model(props) {
-    const group = useRef();
-    const { nodes, materials, animations } = useGLTF("/Sayem_Real_2.glb");
-    const { actions } = useAnimations(animations, group);
+    const group = useRef()
+    const { nodes, materials, animations } = useGLTF('/Sayem_Real_2.glb')
+    const { actions } = useAnimations(animations, group)
     return (
-        <group theatreKey="me" ref={group} {...props} position={[0, -0.9, 0]} scale={[1, 1, 1]} dispose={null} castShadow>
+        <group ref={group} {...props} position={[0, -0.9, 0]} scale={[1, 1, 1]} dispose={null}>
             <group name="Scene">
                 <group name="Armature">
                     <skinnedMesh
@@ -20,44 +20,92 @@ export default function Model(props) {
                         geometry={nodes.avaturn_body.geometry}
                         material={materials.avaturn_body_material}
                         skeleton={nodes.avaturn_body.skeleton}
-                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_hair_0"
                         geometry={nodes.avaturn_hair_0.geometry}
                         material={materials.avaturn_hair_0_material}
                         skeleton={nodes.avaturn_hair_0.skeleton}
-                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_hair_1"
                         geometry={nodes.avaturn_hair_1.geometry}
                         material={materials.avaturn_hair_1_material}
                         skeleton={nodes.avaturn_hair_1.skeleton}
-                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_look_0"
                         geometry={nodes.avaturn_look_0.geometry}
                         material={materials.avaturn_look_0_material}
                         skeleton={nodes.avaturn_look_0.skeleton}
-                        castShadow receiveShadow
                     />
                     <skinnedMesh
                         name="avaturn_shoes_0"
                         geometry={nodes.avaturn_shoes_0.geometry}
                         material={materials.avaturn_shoes_0_material}
                         skeleton={nodes.avaturn_shoes_0.skeleton}
-                        castShadow receiveShadow
                     />
                     <primitive object={nodes.Hips} />
                 </group>
             </group>
         </group>
-    );
+    )
 }
 
-useGLTF.preload("/Sayem_Real_2.glb");
+useGLTF.preload('/Sayem_Real_2.glb')
+
+
+// export default function Model(props) {
+//     const group = useRef();
+//     const { nodes, materials, animations } = useGLTF("/Sayem_Real_2.glb");
+//     const { actions } = useAnimations(animations, group);
+//     return (
+//         <group theatreKey="me" ref={group} {...props} position={[0, -0.9, 0]} scale={[1, 1, 1]} dispose={null}>
+//             <group name="Scene">
+//                 <group name="Armature">
+//                     <skinnedMesh
+//                         name="avaturn_body"
+//                         geometry={nodes.avaturn_body.geometry}
+//                         material={materials.avaturn_body_material}
+//                         skeleton={nodes.avaturn_body.skeleton}
+//                         // castShadow receiveShadow
+//                     />
+//                     <skinnedMesh
+//                         name="avaturn_hair_0"
+//                         geometry={nodes.avaturn_hair_0.geometry}
+//                         material={materials.avaturn_hair_0_material}
+//                         skeleton={nodes.avaturn_hair_0.skeleton}
+//                         // castShadow receiveShadow
+//                     />
+//                     <skinnedMesh
+//                         name="avaturn_hair_1"
+//                         geometry={nodes.avaturn_hair_1.geometry}
+//                         material={materials.avaturn_hair_1_material}
+//                         skeleton={nodes.avaturn_hair_1.skeleton}
+//                         // castShadow receiveShadow
+//                     />
+//                     <skinnedMesh
+//                         name="avaturn_look_0"
+//                         geometry={nodes.avaturn_look_0.geometry}
+//                         material={materials.avaturn_look_0_material}
+//                         skeleton={nodes.avaturn_look_0.skeleton}
+//                         // castShadow receiveShadow
+//                     />
+//                     <skinnedMesh
+//                         name="avaturn_shoes_0"
+//                         geometry={nodes.avaturn_shoes_0.geometry}
+//                         material={materials.avaturn_shoes_0_material}
+//                         skeleton={nodes.avaturn_shoes_0.skeleton}
+//                         // castShadow receiveShadow
+//                     />
+//                     <primitive object={nodes.Hips} />
+//                 </group>
+//             </group>
+//         </group>
+//     );
+// }
+
+// useGLTF.preload("/Sayem_Real_2.glb");
 
 
 // export default function CharacterModel(props) {

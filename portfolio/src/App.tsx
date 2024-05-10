@@ -1,31 +1,59 @@
 import { Canvas, extend } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Billboard, Environment, Image, KeyboardControls, Loader } from '@react-three/drei'
+import { Billboard, Environment, Image, KeyboardControls, Loader, Sphere, Stars } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
-// import { getProject } from '@theatre/core'
-// import studio from '@theatre/studio'
-// import extension from '@theatre/r3f/dist/extension'
-// import { SheetProvider } from '@theatre/r3f'
-// import demoProjectState from './statjson'
-// import { editable as e } from '@theatre/r3f'
-// import nyan from "./assets/nyan.png"
-// import strat from "./assets/strat.png"
+import { getProject } from '@theatre/core'
+import studio from '@theatre/studio'
+import extension from '@theatre/r3f/dist/extension'
+import { SheetProvider } from '@theatre/r3f'
+import demoProjectState from './state.json'
+import { editable as e } from '@theatre/r3f'
+import nyan from "./assets/nyan.png"
+import strat from "./assets/strat.png"
+import mainRoadTexture from "./assets/main_road_material.jpg"
+import intersectionTexture from "./assets/intersection_material.jpg"
+
+const mainRoadTextureLoader = new THREE.TextureLoader().load(mainRoadTexture)
+const intersectionTextureLoader = new THREE.TextureLoader().load(intersectionTexture)
+
+const MainRoad = (props: any) => {
+  return (
+    <mesh theatreKey="road1" {...props}>
+      <planeGeometry args={[30, 30]} />
+      <meshStandardMaterial map={mainRoadTextureLoader} />
+    </mesh>
+  )
+}
+
+const Intersection = (props: any) => {
+  return (
+    <mesh {...props}>
+      <planeGeometry args={[30, 30]} />
+      <meshStandardMaterial map={intersectionTextureLoader} />
+    </mesh>
+  )
+}
+
 
 // our Theatrjs project sheet, we'll use this later
-// const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
+const demoSheet = getProject('Demo Project', { state: demoProjectState }).sheet('Demo Sheet')
 
-// Vite
-// if (import.meta.env.DEV) {
-//   studio.initialize()
-//   studio.extend(extension)
-// }
+if (import.meta.env.DEV) {
+  studio.initialize()
+  studio.extend(extension)
+}
 
 import Lights from './components/Lights'
 // import Map from './Map'
 import Player from './components/Player'
 import ViceCity from './components/Vice_city_map'
+import ViceCityColliderMesh from './components/Vice_city_collider_mesh'
 import Tommy from './components/Tommy-animated'
+import { Perf } from 'r3f-perf'
+import { LayerMaterial, Gradient } from 'lamina'
+import * as THREE from 'three'
+import Ground from './components/Ground'
 
 extend({ Canvas })
 
@@ -66,30 +94,30 @@ export default function App() {
 
   return (
     <>
-      {/* <EcctrlJoystickControls /> */}
-      {/* <Canvas
+      <EcctrlJoystickControls />
+      <Canvas
         shadows
         camera={{
           fov: 65,
           near: 0.1,
-          far: 100,
+          far: 1000,
         }}
         onPointerDown={(e) => {
-          // if (pointerType === 'mouse') {
-          //   (target as HTMLCanvasElement).requestPointerLock()
-          // }
-        }}> */}
-      <color attach={'background'} args={['black']} />
-      {/* <ContactShadows  /> */}
-      {/* <SheetProvider sheet={demoSheet}> */}
-      {/* <Perf position="top-left" minimal /> */}
-      {/* <axesHelper args={[3]} /> */}
-      <Environment preset='night' />
-      {/* <Sphere scale={[50, 50, 50]} rotation-y={Math.PI / 2}>
+          if (e.pointerType === 'mouse') {
+            (e.target as HTMLCanvasElement).requestPointerLock()
+          }
+        }}>
+        <color attach={'background'} args={['black']} />
+        {/* <ContactShadows  /> */}
+        <SheetProvider sheet={demoSheet}>
+          {/* <Perf position="top-left" /> */}
+          <axesHelper args={[3]} />
+          <Environment preset='night' />
+          {/* <Sphere scale={[80, 80, 80]} rotation-y={Math.PI / 2}>
             <LayerMaterial
               // lighting='physical'
               // transmission={1}
-              side={THREBackSide}
+              side={THREE.BackSide}
             >
               <Gradient
                 colorA={"magenta"}
@@ -100,40 +128,37 @@ export default function App() {
               />
             </LayerMaterial>
           </Sphere> */}
-      {/* <Stars /> */}
-      <Lights />
-      {/* <Stats /> */}
-      <Physics timeStep={"vary"} >
-        <KeyboardControls map={keyboardMap}>
-          {/* <Suspense fallback={null}>
+          {/* <Stars /> */}
+          <Lights />
+          {/* <Stats /> */}
+          <Physics>
+            <KeyboardControls map={keyboardMap}>
+              <Player />
+            </KeyboardControls>
+            <Tommy />
+            {/* <Suspense fallback={null}>
           </Suspense> */}
-          <Player />
-        </KeyboardControls>
-        <Suspense fallback={null}>
-          <Tommy />
-        </Suspense>
-        {/* <Ground /> */}
-        <ViceCity />
-        {/* <GroveStreet visible={false} /> */}
-      </Physics>
-      {/* <mesh>
-              <Html position={[0, -0.8, 10]} transform occlude="raycast">
-                <div>
-                  <img src='https://media.tenor.com/5Z5h-ffbqj0AAAAj/%D0%BA%D0%BE%D1%82%D1%83%D1%81%D0%BB%D0%B5%D1%82%D0%BE%D1%83%D1%81.gif' className="object-cover w-64 h-64" />
-                </div>
-              </Html>
-            </mesh> */}
-      {/* <Billboard>
-          <group>
-            <Image url={nyan} transparent />
-          </group>
-          <group>
-            <Image url={strat} transparent zoom={0.35} />
-          </group>
-        </Billboard> */}
-      {/* </SheetProvider> */}
-      {/* </Canvas > */}
-      {/* <Loader /> */}
+            <Ground />
+            <MainRoad position={[0, -0.3, 0]} rotation={[-1.58, 0, 0]} />
+            <Intersection position={[30, -0.3, 0]} rotation={[-1.58, 0, 0]} />
+            <MainRoad position={[60, -0.3, 0]} rotation={[-1.58, 0, 0]} />
+
+            {/* <ViceCity /> */}
+            {/* <ViceCityColliderMesh /> */}
+            {/* <ViceCityColliderMesh /> */}
+            {/* <GroveStreet visible={false} /> */}
+          </Physics>
+          {/* <Billboard>
+            <group>
+              <Image url={nyan} transparent />
+            </group>
+            <group>
+              <Image url={strat} transparent zoom={0.35} />
+            </group>
+          </Billboard> */}
+        </SheetProvider>
+      </Canvas >
+      <Loader />
     </>
   )
 }
