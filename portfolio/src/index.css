@@ -64,3 +64,7 @@ body {
     display: none;
   }
 }
+
+.money {
+  -webkit-text-stroke: 2px black;
+}
