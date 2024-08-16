@@ -18,6 +18,14 @@ export default function Player() {
         fall: 'Falling_Idle'
     }
 
+    const reset = () => {
+        if (ref.current) {
+            ref.current.setTranslation({ x: 24, y: 2, z: 3 })
+            ref.current.setLinvel({ x: 0, y: 0, z: 0 })
+            ref.current.setAngvel({ x: 0, y: 0, z: 0 })
+        }
+    }
+
     useFrame(() => {
         if (ref.current) {
             const position = (ref.current).translation()
@@ -29,23 +37,16 @@ export default function Player() {
         }
     })
 
-    const reset = () => {
-        if (ref.current) {
-            ref.current.setTranslation({ x: 24, y: 2, z: 3 })
-            ref.current.setLinvel({ x: 0, y: 0, z: 0 })
-            ref.current.setAngvel({ x: 0, y: 0, z: 0 })
-        }
-    }
-
     return (
         <>
             <Ecctrl
                 ref={ref}
-                debug
+                // debug
                 animated
                 // position={[26, -0.54, 1.54]}
                 position={[24, -0.54, 3]}
                 camInitDir={{ x: 0, y: -2.09, z: 0 }}
+                autoBalance={false}
             >
                 <EcctrlAnimation
                     characterURL={characterURL} // Must have property

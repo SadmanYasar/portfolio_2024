@@ -1,14 +1,11 @@
 import { Canvas, extend } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Billboard, Environment, Html, Image, KeyboardControls, Loader, Sphere, Stars } from '@react-three/drei'
+import { Billboard, Environment, Image, KeyboardControls, Loader } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { EcctrlJoystick } from 'ecctrl'
 import { getProject } from '@theatre/core'
-import studio from '@theatre/studio'
-import extension from '@theatre/r3f/dist/extension'
 import { SheetProvider } from '@theatre/r3f'
 import demoProjectState from './state.json'
-import { editable as e } from '@theatre/r3f'
 import nyan from "./assets/nyan.png"
 import strat from "./assets/strat.png"
 
@@ -24,16 +21,8 @@ import Lights from './components/Lights'
 // import Map from './Map'
 import Player from './components/Player'
 import ViceCity from './components/Vice_city_map'
-import ViceCityColliderMesh from './components/Vice_city_collider_mesh'
 import Tommy from './components/Tommy-animated'
-import { Perf } from 'r3f-perf'
-import { LayerMaterial, Gradient } from 'lamina'
-import Ground from './components/Ground'
-import { MainRoad } from './components/MainRoad'
-import { Intersection } from './components/Intersection'
 import PopCat from './components/PopCat'
-import { Building_2, Instances } from './components/Building_2'
-import { Building_1 } from './components/Building_1'
 
 extend({ Canvas })
 
@@ -122,10 +111,10 @@ export default function App() {
           }
         }}>
         <color attach={'background'} args={['black']} />
-        {/* <ContactShadows  /> */}
+        {/* <ContactShadows /> */}
         <SheetProvider sheet={demoSheet}>
           {/* <Perf position="top-left" /> */}
-          <axesHelper args={[3]} />
+          {/* <axesHelper args={[3]} /> */}
           <Environment preset='night' />
           {/* <Sphere scale={[80, 80, 80]} rotation-y={Math.PI / 2}>
             <LayerMaterial
@@ -145,19 +134,21 @@ export default function App() {
           {/* <Stars /> */}
           <Lights />
           {/* <Stats /> */}
-          <Physics>
+          <Physics timeStep="vary">
             <KeyboardControls map={keyboardMap}>
-              <Player />
+              <Suspense fallback={null}>
+                <Player />
+              </Suspense>
             </KeyboardControls>
-            <Tommy />
-            {/* <Suspense fallback={null}>
-          </Suspense> */}
-            <Ground />
-            <MainRoad position={[0, -0.3, 0]} rotation={[-1.58, 0, 0]} />
-            <Intersection position={[30, -0.3, 0]} rotation={[-1.58, 0, 0]} />
-            <MainRoad position={[60, -0.3, 0]} rotation={[-1.58, 0, 0]} />
+            <Suspense fallback={null}>
+              <Tommy />
+            </Suspense>
+            {/* <Ground /> */}
+            {/* <MainRoad position={[0, -0.3, 0]} rotation={[-1.58, 0, 0]} /> */}
+            {/* <Intersection position={[30, -0.3, 0]} rotation={[-1.58, 0, 0]} /> */}
+            {/* <MainRoad position={[60, -0.3, 0]} rotation={[-1.58, 0, 0]} /> */}
 
-            {/* <ViceCity /> */}
+            <ViceCity />
             {/* <ViceCityColliderMesh /> */}
             {/* <ViceCityColliderMesh /> */}
             {/* <GroveStreet visible={false} /> */}
@@ -171,11 +162,11 @@ export default function App() {
             </group>
           </Billboard>
           <PopCat />
-          <Instances>
-            {/* <Building_2 /> */}
+          {/* <Instances>
+            <Building_2 />
             <Building_2 position={[-8.17, -0.23, 25.55]} rotation={[0, -1.54, 0]} scale={[0.5, 0.5, 0.5]} />
             <Building_2 position={[50, -0.23, 25.55]} rotation={[0, -1.54, 0]} scale={[0.5, 0.5, 0.5]} />
-          </Instances>
+          </Instances> */}
         </SheetProvider>
       </Canvas >
       <Loader />

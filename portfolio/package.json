@@ -18,18 +18,19 @@
     "@theatre/core": "^0.7.0",
     "@theatre/r3f": "^0.7.0",
     "@theatre/studio": "^0.7.0",
+    "@types/react": "^18.2.25",
     "@types/three": "^0.157.0",
     "@use-gesture/core": "^10.3.0",
     "ecctrl": "^1.0.75",
     "lamina": "^1.1.23",
     "leva": "^0.9.35",
     "lottie-react": "^2.4.0",
+    "portfolio": "file:",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "^0.157.0",
-    "tinacms": "^1.5.28",
-    "@types/react": "^18.2.25"
+    "tinacms": "^1.5.28"
   },
   "devDependencies": {
     "@tinacms/cli": "^1.5.39",
